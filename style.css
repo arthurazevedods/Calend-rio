@@ -191,34 +191,44 @@ input[type="text"] {
     transition: all 0.3s ease;
 }
 
-@media screen and (max-width: 1200px) {
 
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr);
-    }
 
-}
-
-@media screen and (max-width: 992px) {
-
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr);
-    }
-
-}
 
 @media screen and (max-width: 768px) {
 
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr);
+
+    .planner{
+        width: 520px;
+        height: 300px;
+    }
+    .calendar-day-name{
+        width: 60px;
+    }
+    .calendar-day {
+        padding: 5px;
+        border-radius: 8px;
+        min-height: 20px;
+        width: 60px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
 }
 
 @media screen and (max-width: 576px) {
 
-    .calendar-grid {
-        grid-template-columns: repeat(7, 1fr);
+    .planner{
+        width: 420px;
+        height: 300px;
     }
-
+    .calendar-day-name{
+        width: 40px;
+    }
+    .calendar-day {
+        padding: 5px;
+        border-radius: 8px;
+        min-height: 20px;
+        width: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
 }
