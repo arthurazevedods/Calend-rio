@@ -6,7 +6,8 @@ window.onload = function () {
 // Gerar Calendário
 function generateCalendar() {
     const calendar = document.getElementById('calendar');
-    const calendarHeader = document.getElementById('calendar-header'); // Adicionado
+    const calendarHeader = document.getElementById('calendar-header');
+    const calendarDaysWeek = document.getElementById('calendar-daysweek');
 
     const currentDate = new Date();
     const month = currentDate.getMonth();
@@ -16,12 +17,18 @@ function generateCalendar() {
     const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
     const totalDays = lastDayOfMonth.getDate();
 
-    calendarHeader.innerHTML = '<h1>Calendário</h1>';
-
     // Adiciona o mês e o ano ao cabeçalho
-    const monthYearText = document.createElement("h2");
-    monthYearText.textContent = `${getMonthName(month)} de ${year}`;
+    const monthYearText = document.createElement("span");
+    monthYearText.classList.add("month-year-text");
+    monthYearText.textContent = `${getMonthName(month)} ${year}`;
     calendarHeader.appendChild(monthYearText);
+    const iconsArrow = document.createElement("div");
+    iconsArrow.classList.add('icons-arrow');
+    iconsArrow.innerHTML = `
+        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-right"></i>
+    ` 
+    calendarHeader.appendChild(iconsArrow);
 
     // Adiciona os nomes dos dias da semana no topo do calendário
     const daysOfWeekElement = document.createElement('div');
@@ -32,7 +39,7 @@ function generateCalendar() {
         dayName.textContent = dayOfWeek;
         daysOfWeekElement.appendChild(dayName);
     }
-    calendarHeader.appendChild(daysOfWeekElement);
+    calendarDaysWeek.appendChild(daysOfWeekElement);
 
     // Calcula o índice do primeiro dia do mês na semana
     const firstDayOfWeekIndex = firstDayOfMonth.getDay();
