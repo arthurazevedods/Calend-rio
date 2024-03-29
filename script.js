@@ -48,8 +48,17 @@ function generateCalendar() {
     for (let day = 1; day <= totalDays; day++) {
         let daySquare = document.createElement("div");
         daySquare.className = "calendar-day";
-        daySquare.textContent = day;
         daySquare.id = `day-${day}`;
+
+        let dayNumber = document.createElement("span");
+        dayNumber.className = "day-number";
+        dayNumber.textContent = day;
+        daySquare.appendChild(dayNumber);
+
+        const numberOfTasks = document.createElement("span");
+        numberOfTasks.className = "numberOfTasks";
+        numberOfTasks.textContent = "0"; // Inicializa o contador como 0
+        daySquare.appendChild(numberOfTasks);
 
         // Verifica se o dia é domingo (índice 0 no objeto Date)
         if (new Date(year, month, day).getDay() === 0) {
@@ -96,38 +105,8 @@ function editTask(taskElement) {
     }
 }
 
-// Add tarefa
-function addTask() {
-    // Obter a data e a descrição da tarefa dos campos de entrada
-    const taskDate = new Date(document.getElementById('task-date').value);
-    const taskDesc = document.getElementById('task-desc').value.trim();
-    
 
-    const calendar = document.getElementById('calendar');
 
-    if (taskDesc && !isNaN(taskDate.getDate())) {
-        for (let day of calendar.children) {
-            if (parseInt(day.textContent) === taskDate.getDate()) {
-                const taskElement = document.createElement("div");
-                taskElement.className = "task";
-                taskElement.textContent = taskDesc;
-                taskElement.addEventListener("contextmenu", function (event) {
-                    event.preventDefault();
-                    deleteTask(taskElement);
-                });
-                taskElement.addEventListener('click', function () {
-                    editTask(taskElement);
-                });
-                day.appendChild(taskElement);
-                break;
-            }
-        }
-        closeAddTaskModal();
-    } else {
-        alert("Por favor, insira uma data válida e descrição da tarefa!");
-    }
-
-}
 
 const arrowRight = document.getElementById("arrowRight");
 
