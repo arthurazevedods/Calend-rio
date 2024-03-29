@@ -1,3 +1,4 @@
+
 // Carrega o calendário
 window.onload = function () {
     generateCalendar();
@@ -18,17 +19,9 @@ function generateCalendar() {
     const totalDays = lastDayOfMonth.getDate();
 
     // Adiciona o mês e o ano ao cabeçalho
-    const monthYearText = document.createElement("span");
-    monthYearText.classList.add("month-year-text");
+    const monthYearText = document.querySelector(".month-year-text");
     monthYearText.textContent = `${getMonthName(month)} ${year}`;
-    calendarHeader.appendChild(monthYearText);
-    const iconsArrow = document.createElement("div");
-    iconsArrow.classList.add('icons-arrow');
-    iconsArrow.innerHTML = `
-        <i class="fa-solid fa-chevron-left"></i>
-        <i class="fa-solid fa-chevron-right"></i>
-    ` 
-    calendarHeader.appendChild(iconsArrow);
+
 
     // Adiciona os nomes dos dias da semana no topo do calendário
     const daysOfWeekElement = document.createElement('div');
@@ -135,3 +128,15 @@ function addTask() {
     }
 
 }
+
+const arrowRight = document.getElementById("arrowRight");
+
+arrowRight.addEventListener("click", ()=>{
+    console.log("oahahd");
+})
+
+const arrowLeft = document.getElementById("arrowLeft");
+
+arrowLeft.addEventListener("click", ()=>{
+    console.log("oahahd");
+})
