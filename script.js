@@ -1,26 +1,27 @@
+const currentDate = new Date();
+let month = currentDate.getMonth();
+let year = currentDate.getFullYear();
 
 // Carrega o calendário
 window.onload = function () {
-    generateCalendar();
+    generateCalendar(currentDate,month, year);
 };
 
 // Gerar Calendário
-function generateCalendar() {
+function generateCalendar(currDay,monthCalendar, year) {
     const calendar = document.getElementById('calendar');
     const calendarHeader = document.getElementById('calendar-header');
     const calendarDaysWeek = document.getElementById('calendar-daysweek');
 
-    const currentDate = new Date();
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    const firstDayOfMonth = new Date(year, monthCalendar, 1);
+    const lastDayOfMonth = new Date(year, monthCalendar + 1, 0);
     const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
     const totalDays = lastDayOfMonth.getDate();
 
     // Adiciona o mês e o ano ao cabeçalho
     const monthYearText = document.querySelector(".month-year-text");
-    monthYearText.textContent = `${getMonthName(month)} ${year}`;
+    monthYearText.textContent = `${getMonthName(monthCalendar)} ${year}`;
 
 
     // Adiciona os nomes dos dias da semana no topo do calendário
@@ -48,8 +49,12 @@ function generateCalendar() {
     for (let day = 1; day <= totalDays; day++) {
         let daySquare = document.createElement("div");
         daySquare.className = "calendar-day";
-        daySquare.id = `day-${day}`;
-
+        daySquare.id = `day-${day}`; 
+        if (day === currDay.getDate() && monthCalendar === month) {
+            console.log('currDay',currDay.getMonth());
+            console.log('Month',monthCalendar);
+            daySquare.classList.add('today');
+        }
         let dayNumber = document.createElement("span");
         dayNumber.className = "day-number";
         dayNumber.textContent = day;
@@ -61,7 +66,7 @@ function generateCalendar() {
         daySquare.appendChild(numberOfTasks);
 
         // Verifica se o dia é domingo (índice 0 no objeto Date)
-        if (new Date(year, month, day).getDay() === 0) {
+        if (new Date(year, monthCalendar, day).getDay() === 0) {
             daySquare.classList.add('sunday'); // Adiciona a classe CSS para domingos
         }
 
@@ -69,10 +74,17 @@ function generateCalendar() {
     }
 }
 
+function clearCalendar(){
+    const daysweek = document.getElementById('calendar-daysweek');
+    const calendario = document.getElementById('calendar');
+    calendario.innerHTML = '';
+    daysweek.innerHTML = '';
+}
+
 // Função auxiliar para obter o nome do mês a partir do número do mês
 function getMonthName(month) {
     const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-                        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     return monthNames[month];
 }
 
@@ -105,17 +117,18 @@ function editTask(taskElement) {
     }
 }
 
-
-
-
 const arrowRight = document.getElementById("arrowRight");
 
-arrowRight.addEventListener("click", ()=>{
-    console.log("oahahd");
+arrowRight.addEventListener("click", () => {
+    console.log("right");
+    clearCalendar();
+    generateCalendar(currentDate,month++,year);
 })
 
 const arrowLeft = document.getElementById("arrowLeft");
 
-arrowLeft.addEventListener("click", ()=>{
-    console.log("oahahd");
+arrowLeft.addEventListener("click", () => {
+    console.log("left");
+    clearCalendar();
+    generateCalendar(currentDate,month--,year);
 })

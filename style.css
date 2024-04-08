@@ -110,9 +110,14 @@ h1 {
 }
 
 .sunday {
-    background-color: #ffb703;
+    background-color: #219ebc;
     color: #fff;
     /* Cor de fundo para os domingos */
+}
+
+.today{
+    background-color: #ffb703;
+    color: #fff;
 }
 
 .numberOfTasks{
